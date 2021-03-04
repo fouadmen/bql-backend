@@ -1,0 +1,30 @@
+export default function makeGetProduct({ addProduct }) {
+    return async function getProduct (httpRequest){
+        try {
+            // const productInfo = httpRequest.body;
+            const posted = await addProduct("product Id");
+
+            return {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Last-Modified': new Date(posted.modifiedOn).toUTCString()
+                },
+                statusCode: 201,
+                body: {posted}
+            }
+        } catch (error) {
+            // TODO : Error logging
+            console.error(error);
+
+            return {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                statusCode: 400,
+                body: {
+                    error: error.message
+                }
+            }
+        }
+    }
+}
