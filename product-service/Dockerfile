@@ -1,7 +1,4 @@
 FROM node:14
-ENV PGUSER=postgres 
-ENV PGHOST=db
-ENV PGPASSWORD=postgres
 
 WORKDIR /app
 
