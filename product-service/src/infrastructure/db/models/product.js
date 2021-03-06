@@ -1,16 +1,7 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Product extends Model {
-    static associate(models) {
-      Product.belongsTo(models.Category) //TODO : check this association
-    }
-  };
-  Product.init({
+  const Product = sequelize.define('Product', {
     id: {
-      type: DataTypes.BIGINT.UNSIGNED,
+      type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
@@ -20,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
     },
     category:{
-        type: DataTypes.BIGINT.UNSIGNED,
+        type: DataTypes.BIGINT,
         allowNull:false,
                     /*
             type: DataTypes.INTEGER,
@@ -45,10 +36,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    sellingPrice:{
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
     createdOn:{
         type: DataTypes.DATE, 
         defaultValue: DataTypes.NOW
@@ -56,10 +43,11 @@ module.exports = (sequelize, DataTypes) => {
     modifiedOn:{
         type: DataTypes.DATE, 
         defaultValue: DataTypes.NOW
-    }
-  }, {
-    sequelize,
-    modelName: 'Product',
-  });
+    }  
+  }, {});
+  // Product.associate = function(models) {
+  //   // associations can be defined here
+  //   // Product.belongsTo(models.Category) //TODO : check this association
+  // };
   return Product;
 };
