@@ -1,4 +1,4 @@
-import { addProduct, getProduct, updateProduct, deleteProduct } from "../application";
+import { addProduct, getProduct, updateProduct, deleteProduct } from "../../application";
 import makePostProduct from "./post-product";
 import makeFetchProduct from "./fetch-product";
 import makePatchProduct from "./patch-product";
