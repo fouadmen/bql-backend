@@ -2,40 +2,27 @@ export default function CategoryMapper(categoryModel) {
     return Object.freeze({
         findAll,
         findById,
-        findByBarcode,
+        findByName,
         insert,
         remove,
         update
     })
     async function findAll() {
-        const client = await getClient();
-        const QUERY = "SELECT NOW()"
-        try {
-            const res = await client.query(QUERY)
-            console.log(res.rows[0]);
-        } catch (error) {
-            console.error(error);
-        }
-        // throw Error("Needs to be implemented.")
+        return await categoryModel.findAll();
     }
     async function findById(id) {
-        const db = await getClient();
         throw Error("Needs to be implemented.")
     }
-    async function findByBarcode(barcode) {
-        const db = await getClient();
-        throw Error("Needs to be implemented.")
+    async function findByName({name : name}) {
+        return await categoryModel.findOne({where: {name : name}});
     }
-    async function insert(...categoryInfo) {
-        const db = await getClient();
-        throw Error("Needs to be implemented.")
+    async function insert(categoryInfo) {
+        return await categoryModel.create(categoryInfo);
     }
-    async function remove(id) {
-        const db = await getClient();
-        throw Error("Needs to be implemented.")
+    async function remove(name) {
+        return await categoryModel.destroy({where : {name : name}});
     }
-    async function update(id, categoryInfo) {
-        const db = await getClient();
-        throw Error("Needs to be implemented.")
+    async function update(name, categoryInfo) {
+        return await categoryModel.update(categoryInfo, {where : {name : name}});
     }
 }

@@ -8,14 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       }, 
       name: {
           type: DataTypes.STRING(50),
-          allowNull: false
+          allowNull: false,
+          unique: true
       },
       description:{
           type: DataTypes.STRING(255)
-      },
-      barcode:{
-          type: DataTypes.BIGINT.UNSIGNED,
-          unique: true
       },
       createdOn:{
           type: DataTypes.DATE, 
