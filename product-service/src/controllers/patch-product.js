@@ -1,21 +1,20 @@
-export default function makeGetProduct({ addProduct }) {
-    return async function getProduct (httpRequest){
+export default function makePatchProduct({ updateProduct }) {
+    return async function patchProduct (httpRequest){
         try {
-            // const productInfo = httpRequest.body;
-            const posted = await addProduct("product Id");
-
+            const productInfo = httpRequest.body;
+            const productBarcode = httpRequest.params.barcode;
+            const updated = await updateProduct(productBarcode, productInfo);
             return {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Last-Modified': new Date(posted.modifiedOn).toUTCString()
+                    'Last-Modified': new Date(updated.modifiedOn).toUTCString()
                 },
                 statusCode: 201,
-                body: {posted}
-            }
+                body: {updated}
+            }    
         } catch (error) {
             // TODO : Error logging
             console.error(error);
-
             return {
                 headers: {
                     'Content-Type': 'application/json',

@@ -8,26 +8,21 @@ export default function ProductMapper(productModel) {
         update
     })
     async function findAll() {
-        
-        return true;
-        // throw Error("Needs to be implemented.")
+        return await productModel.findAll();
     }
     async function findById(id) {
         throw Error("Needs to be implemented.")
     }
-    async function findByBarcode(barcode) {
-        throw Error("Needs to be implemented.")
+    async function findByBarcode({barcode : barcode}) {
+        return await productModel.findOne({where: {barcode : barcode}});
     }
-    async function insert(...productInfo) {
-
-        throw Error("Needs to be implemented.")
+    async function insert(productInfo) {
+        return await productModel.create(productInfo);
     }
-    async function remove(id) {
-
-        throw Error("Needs to be implemented.")
+    async function remove(barcode) {
+        return await productModel.destroy({where : {barcode : barcode}});
     }
-    async function update(id, productInfo) {
-
-        throw Error("Needs to be implemented.")
+    async function update(barcode, productInfo) {
+        return await productModel.update(productInfo, {where : {barcode : barcode}});
     }
 }
