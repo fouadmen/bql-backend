@@ -66,7 +66,7 @@ export function makePatchCategory({ updateCategory }) {
             return {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Last-Modified': new Date(updated.modifiedOn).toUTCString()
+                    
                 },
                 statusCode: 201,
                 body: {updated}
@@ -96,7 +96,7 @@ export function makePostCategory({ addCategory }) {
                 return {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Last-Modified': new Date(posted.modifiedOn).toUTCString()
+                        
                     },
                     statusCode: 201,
                     body: {posted}
