@@ -11,10 +11,7 @@ export function makeAddProduct(productsDb) {
             description: product.getDescription(),
             barcode: product.getBarcode(),
             unit: product.getUnit(),
-            imageUri: product.getImageUri(),
-            price : product.getProce(),
-            purchasePrice: product.getPurchagePrice(),
-            quantity : product.getQuantity()
+            imageUri: product.getImageUri()
         })
     }
 }
@@ -52,11 +49,7 @@ export function makeUpdateProduct(productsDb) {
             description: product.getDescription(),
             barcode: product.getBarcode(),
             unit: product.getUnit(),
-            imageUri: product.getImageUri(),
-            modifiedOn : product.getModiedOn(),
-            price : product.getProce(),
-            purchasePrice: product.getPurchagePrice(),
-            quantity: product.getQuantity()
+            imageUri: product.getImageUri()
         });
     } 
 }

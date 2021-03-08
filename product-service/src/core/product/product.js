@@ -7,9 +7,6 @@ export default function buildMakeProduct({Id, makeCategory}) {
         barcode,
         unit,
         imageUri="",
-        price,
-        purchasePrice,
-        quantity
     }) {
         if (!Id.isValidId(id)) {
             throw new Error("Product must have valid id.");
@@ -26,15 +23,6 @@ export default function buildMakeProduct({Id, makeCategory}) {
         if (!unit) {
             throw new Error("Product must have a valid unit");
         }
-        if (!price) {
-            throw new Error("Product must have a price");
-        }
-        if (!purchasePrice) {
-            throw new Error("Product must have a purchasePrice");
-        }
-        if (!quantity) {
-            throw new Error("Product must have a purchasePrice");
-        }
 
         return Object.freeze({
             getId : ()=> id,
@@ -43,10 +31,7 @@ export default function buildMakeProduct({Id, makeCategory}) {
             getDescription: ()=> description,
             getBarcode : ()=> barcode,
             getUnit : ()=> unit,
-            getImageUri: ()=> imageUri,
-            getProce:()=>price,
-            getPurchagePrice: ()=>purchasePrice,
-            getQuantity : ()=>quantity
+            getImageUri: ()=> imageUri
         })
 
     }

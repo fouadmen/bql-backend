@@ -19,14 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     price:{
         type: DataTypes.FLOAT,
         allowNull: false
-    },
-    purchasePrice:{
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    quantity : {
-      type: DataTypes.FLOAT,
-      allowNull: false
     }
   }, {});
   Product.associate = function(models) {
