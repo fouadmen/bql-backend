@@ -4,22 +4,27 @@ export default function buildMakeStock({Id}) {
         quantity,
         minLimit,
         buyingPrice,
-        sellingPrice
+        sellingPrice,
+        storeId
     }) {
         if (!Id.isValidId(id)) {
-            throw new Error("Product must have valid id.");
+            throw new Error("Stock must have valid id.");
+        }
+        console.log(storeId);
+        if (!Id.isValidId(storeId)) {
+            throw new Error("Stock must have valid storeId.");
         }
         if (!quantity) {
-           throw new Error("Product must have a valid quantity"); 
+           throw new Error("Stock must have a valid quantity"); 
         }
         if (!minLimit) {
-           throw new Error("Product must have a valid minLimit"); 
+           throw new Error("Stock must have a valid minLimit"); 
         }
         if (!buyingPrice) {
-            throw new Error("Product must have a valid buyingPrice");
+            throw new Error("Stock must have a valid buyingPrice");
         }
         if (!sellingPrice) {
-            throw new Error("Product must have a valid sellingPrice");
+            throw new Error("Stock must have a valid sellingPrice");
         }
 
         return Object.freeze({
@@ -27,7 +32,8 @@ export default function buildMakeStock({Id}) {
             getQuantity: ()=> quantity,
             getMinLimit : ()=> minLimit,
             getBuyingPrice : ()=> buyingPrice,
-            getSellingPrice: ()=> sellingPrice
+            getSellingPrice: ()=> sellingPrice,
+            getStoreId: ()=>storeId
         })
 
     }

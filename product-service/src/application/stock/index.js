@@ -2,6 +2,7 @@ import { stockMapper } from "../../infrastructure/db";
 import makeStock from "../../core/stock";
 export function makeAddStock(stocksDb) {
     return async function addStock(stockInfo) {
+        console.log(stockInfo);
         const stock = makeStock(stockInfo);
         const exists = await stocksDb.findById(stock.getId());
         return exists ? false : stocksDb.insert({
@@ -9,7 +10,8 @@ export function makeAddStock(stocksDb) {
             minLimit: stock.getMinLimit(),
             buyingPrice: stock.getBuyingPrice(),
             sellingPrice: stock.getSellingPrice(),
-            quantity: stock.getQuantity()
+            quantity: stock.getQuantity(),
+            storeId: stock.getStoreId()
         })
     }
 }
@@ -52,7 +54,9 @@ export function makeUpdateStock(stocksDb) {
             id: stock.getId(),
             minLimit: stock.getMinLimit(),
             buyingPrice: stock.getBuyingPrice(),
-            sellingPrice: stock.getSellingPrice()
+            sellingPrice: stock.getSellingPrice(),
+            quantity: stock.getQuantity(),
+            storeId: stock.getStoreId()
         });
     } 
 }

@@ -26,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Product.associate = function(models) {
-     //TODO : check this association
     Product.belongsTo(models.stock);
     Product.belongsTo(models.category); 
   };
