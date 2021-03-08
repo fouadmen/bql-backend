@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use("/api", baseRouter);
 
-models.sequelize.sync({ force: false })
+models.sequelize.sync({ force: true })
 .then((res) => {
     app.listen(5050, () => { console.log("Connected")}); 
 }).catch((err) => {

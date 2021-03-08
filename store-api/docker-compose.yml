@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  products_api:
-    container_name: 'products_api'
+  store_api:
+    container_name: 'store_api'
     restart: always
     build: ./
     ports: 
@@ -11,11 +11,11 @@ services:
       - .:/app
       - ./node_modules:/app/node_modules
     depends_on: 
-      - products_db
+      - store_db
     env_file: 
       - .env
-  products_db:
-    container_name: 'products_db'
+  store_db:
+    container_name: 'store_db'
     image: postgres
     restart: always
     ports:
@@ -23,10 +23,10 @@ services:
     environment: 
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=baqala_products_db
+      - POSTGRES_DB=baqala_store_db
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes: 
-      - products_db:/var/lib/postgresql/data
+      - store_db:/var/lib/postgresql/data
 volumes: 
-  products_db : {}
+  store_db : {}
 
