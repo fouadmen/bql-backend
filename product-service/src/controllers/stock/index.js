@@ -130,7 +130,6 @@ export function makeRemoveStock({ deleteStock }) {
 export function makeListStocks({ getAllStocks }) {
     return async function listStocks (){
         try {
-            console.log(getAllStocks)
             const stocks = await getAllStocks();
             return {
                 headers: {

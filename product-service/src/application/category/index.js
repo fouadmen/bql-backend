@@ -16,7 +16,6 @@ export function makeAddCategory(categorysDb) {
 
 export function makeGetCategory(categorysDb) {
     return async function getCategory(id) {
-        console.log(id);
         if (!id) {
             throw Error("Category id is required");
         }
