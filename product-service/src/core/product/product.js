@@ -1,4 +1,4 @@
-export default function buildMakeProduct({Id, makeCategory}) {
+export default function buildMakeProduct({Id}) {
     return function Product({
         id=Id.makeId(),
         name,
