@@ -1,7 +1,6 @@
 export default function buildMakeStock({Id}) {
     return function Stock({
         id=Id.makeId(),
-        productId,
         quantity,
         minLimit,
         buyingPrice,
@@ -9,9 +8,6 @@ export default function buildMakeStock({Id}) {
     }) {
         if (!Id.isValidId(id)) {
             throw new Error("Product must have valid id.");
-        }
-        if (!Id.isValidId(categoryId)) {
-            throw new Error("Product must have valid category Id.");
         }
         if (!quantity) {
            throw new Error("Product must have a valid quantity"); 
@@ -28,7 +24,6 @@ export default function buildMakeStock({Id}) {
 
         return Object.freeze({
             getId : ()=> id,
-            getProductId: ()=> productId,
             getQuantity: ()=> quantity,
             getMinLimit : ()=> minLimit,
             getBuyingPrice : ()=> buyingPrice,

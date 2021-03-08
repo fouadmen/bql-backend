@@ -16,15 +16,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BIGINT.UNSIGNED,
         unique: true
     },
-    price:{
-        type: DataTypes.FLOAT,
-        allowNull: false
+    unit : {
+      type: DataTypes.STRING(10),
+      unique: false
+    },
+    imageUri : {
+      type: DataTypes.STRING,
+      unique: false
     }
   }, {});
   Product.associate = function(models) {
      //TODO : check this association
-    Product.belongsTo(models.category);
     Product.belongsTo(models.stock);
+    Product.belongsTo(models.category); 
   };
   return Product;
 };

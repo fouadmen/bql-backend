@@ -11,7 +11,7 @@ export default function ProductMapper(productModel) {
         return await productModel.findAll();
     }
     async function findByBarcode({barcode : barcode}) {
-        const product = await productModel.findOne({where: {barcode : barcode}, include : models.category});
+        const product = await productModel.findOne({where: {barcode : barcode}, include : [models.category, models.stock]});
         return product;
     }
     async function insert(productInfo) {

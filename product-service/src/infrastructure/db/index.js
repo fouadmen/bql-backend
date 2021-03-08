@@ -5,6 +5,6 @@ import StockMapper from './mappers/stock.mapper';
 
 const productMapper = ProductMapper(models.product);
 const categoryMapper = CategoryMapper(models.category);
-const stockMapper = CategoryMapper(models.stock);
+const stockMapper = StockMapper(models.stock);
 
 export { productMapper, categoryMapper, stockMapper };

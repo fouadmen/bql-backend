@@ -1,5 +1,11 @@
 module.exports = (sequelize,DataTypes) => {
     const Category = sequelize.define('category', { 
+      id : {
+        type : DataTypes.STRING(26),
+        unique: true,
+        allowNull: false,
+        primaryKey: true
+      },
       name: {
           type: DataTypes.STRING(50),
           allowNull: false,
@@ -10,12 +16,6 @@ module.exports = (sequelize,DataTypes) => {
       },
       imageUri :{
           type: DataTypes.STRING(255)
-      },
-      id : {
-        type : DataTypes.STRING(26),
-        unique: true,
-        allowNull: false,
-        primaryKey: true
       }
     }, {});
     Category.associate = function(models) {

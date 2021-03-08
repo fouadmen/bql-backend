@@ -1,5 +1,5 @@
 import { productMapper } from "../../infrastructure/db";
-
+import makeProduct from "../../core/product";
 export function makeAddProduct(productsDb) {
     return async function addProduct(productInfo) {
         const product = makeProduct(productInfo);
@@ -8,6 +8,7 @@ export function makeAddProduct(productsDb) {
             id: product.getId(),
             name: product.getName(),
             categoryId: product.getCategoryId(),
+            stockId:product.getStockId(),
             description: product.getDescription(),
             barcode: product.getBarcode(),
             unit: product.getUnit(),
@@ -45,7 +46,8 @@ export function makeUpdateProduct(productsDb) {
         const product = makeProduct(productInfo);
         return await productsDb.update(barcode, {
             name: product.getName(),
-            category: product.getCategoryId(),
+            categoryId: product.getCategoryId(),
+            stockId:product.getStockId(),
             description: product.getDescription(),
             barcode: product.getBarcode(),
             unit: product.getUnit(),
