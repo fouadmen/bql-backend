@@ -1,16 +1,16 @@
-import { addCategory, getCategory, updateCategory, deleteCategory, getAllCategories } from "../../application";
+import { addStock, getStock, updateStock, deleteStock, getAllStocks } from "../../application";
 
-export function makeFetchCategory({ getCategory }) {
-    return async function fetchCategory (httpRequest){
+export function makeFetchStock({ getStock }) {
+    return async function fetchStock (httpRequest){
         try {
             const id = httpRequest.params.id;
-            const category = await getCategory(id);
+            const stock = await getStock(id);
             return {
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 statusCode: 200,
-                body: {category}
+                body: {stock}
             }
         } catch (error) {
             // TODO : Error logging
@@ -29,40 +29,12 @@ export function makeFetchCategory({ getCategory }) {
     }
 }
 
-export function makeListCategories({ getAllCategories }) {
-    return async function listCategories (httpRequest){
+export function makePatchStock({ updateStock }) {
+    return async function patchStock (httpRequest){
         try {
-            const categories = await getAllCategories();
-            return {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                statusCode: 200,
-                body: {categories}
-            }
-        } catch (error) {
-            // TODO : Error logging
-            console.error(error);
-
-            return {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                statusCode: 400,
-                body: {
-                    error: error.message
-                }
-            }
-        }
-    }
-}
-
-export function makePatchCategory({ updateCategory }) {
-    return async function patchCategory (httpRequest){
-        try {
-            const categoryInfo = httpRequest.body;
-            const categoryName= httpRequest.params.name;
-            const updated = await updateCategory(categoryName, categoryInfo);
+            const stockInfo = httpRequest.body;
+            const id = httpRequest.params.id;
+            const updated = await updateStock(id, stockInfo);
             return {
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,11 +59,11 @@ export function makePatchCategory({ updateCategory }) {
     }
 }
 
-export function makePostCategory({ addCategory }) {
-    return async function postCategory (httpRequest){
+export function makePostStock({ addStock }) {
+    return async function postStock (httpRequest){
         try {
-            const categoryInfo = httpRequest.body;
-            const posted = await addCategory(categoryInfo);
+            const stockInfo = httpRequest.body;
+            const posted = await addStock(stockInfo);
             if (posted) {
                 return {
                     headers: {
@@ -127,11 +99,11 @@ export function makePostCategory({ addCategory }) {
     }
 }
 
-export function makeRemoveCategory({ deleteCategory }) {
-    return async function removeCategory (httpRequest){
+export function makeRemoveStock({ deleteStock }) {
+    return async function removeStock (httpRequest){
         try {
-            const categoryName = httpRequest.params.name;
-            const deleted = await deleteCategory(categoryName);
+            const id = httpRequest.params.id;
+            const stock = await getStock(id);
             return {
                 headers: {
                     'Content-Type': 'application/json',
@@ -155,12 +127,43 @@ export function makeRemoveCategory({ deleteCategory }) {
     }
 }
 
-const postCategory = makePostCategory({addCategory});
-const fetchCategory = makeFetchCategory({getCategory});
-const patchCategory = makePatchCategory({updateCategory});
-const removeCategory = makeRemoveCategory({deleteCategory});
-const listCategories = makeListCategories({getAllCategories});
-const categoryController = Object.freeze({ postCategory, fetchCategory, patchCategory, removeCategory, listCategories });
+export function makeListStocks({ getAllStocks }) {
+    return async function listStocks (){
+        try {
+            console.log(getAllStocks)
+            const stocks = await getAllStocks();
+            return {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                statusCode: 200,
+                body: {stocks}
+            }
+        } catch (error) {
+            // TODO : Error logging
+            console.error(error);
 
-export default categoryController;
-export { postCategory, fetchCategory, patchCategory, removeCategory, listCategories };
+            return {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                statusCode: 400,
+                body: {
+                    error: error.message
+                }
+            }
+        }
+    }
+}
+
+
+const postStock = makePostStock({addStock});
+const fetchStock = makeFetchStock({getStock});
+const patchStock = makePatchStock({updateStock});
+const removeStock = makeRemoveStock({deleteStock});
+const listStocks = makeListStocks({getAllStocks});
+
+const stockController = Object.freeze({ postStock, fetchStock, patchStock, removeStock, listStocks });
+
+export default stockController;
+export { postStock, fetchStock, patchStock, removeStock, listStocks };

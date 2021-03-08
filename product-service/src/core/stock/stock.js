@@ -1,40 +1,39 @@
-// import { Product } from ".";
-// import { Entity, Result, ID } from "./shared";
+export default function buildMakeStock({Id}) {
+    return function Stock({
+        id=Id.makeId(),
+        productId,
+        quantity,
+        minLimit,
+        buyingPrice,
+        sellingPrice
+    }) {
+        if (!Id.isValidId(id)) {
+            throw new Error("Product must have valid id.");
+        }
+        if (!Id.isValidId(categoryId)) {
+            throw new Error("Product must have valid category Id.");
+        }
+        if (!quantity) {
+           throw new Error("Product must have a valid quantity"); 
+        }
+        if (!minLimit) {
+           throw new Error("Product must have a valid minLimit"); 
+        }
+        if (!buyingPrice) {
+            throw new Error("Product must have a valid buyingPrice");
+        }
+        if (!sellingPrice) {
+            throw new Error("Product must have a valid sellingPrice");
+        }
 
-// export interface IStock {
-//     product: Product, 
-//     quantity : number,
-//     minLimit : number,
-//     createdDate : number,
-//     updatedDate : number,
-//     buyingPrice : number,
-//     sellingPrice : number  
-// }
+        return Object.freeze({
+            getId : ()=> id,
+            getProductId: ()=> productId,
+            getQuantity: ()=> quantity,
+            getMinLimit : ()=> minLimit,
+            getBuyingPrice : ()=> buyingPrice,
+            getSellingPrice: ()=> sellingPrice
+        })
 
-// export class Stock extends Entity<IStock> {
-//     private constructor(props : IStock, id?: ID) {
-//         super(props, id);
-//     }
-
-//     public get product() : Product { return this.props.product; }
-    
-//     public get quantity() : number { return this.props.quantity }
-
-//     public get minLimit() : number { return this.props.minLimit; }
-    
-//     public get createdDate() : number { return this.props.createdDate }
-    
-//     public get updatedDate() : number { return this.props.updatedDate }
-
-//     public get sellingPrice() : number { return this.props.sellingPrice }
-
-//     public static build(props : IStock, id?: ID) : Result<Stock> {
-//         /* add validation */
-//         return Result.success<Stock>(new Stock(props, id));
-//     }
-    
-// }
-
-export default function buildStock({}) {
-    
+    }
 }

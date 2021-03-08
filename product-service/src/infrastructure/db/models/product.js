@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Product.associate = function(models) {
      //TODO : check this association
-    Product.belongsTo(models.category)
+    Product.belongsTo(models.category);
+    Product.belongsTo(models.stock);
   };
   return Product;
 };
