@@ -1,9 +1,65 @@
-import makeAddProduct from "./add-product";
-import makeGetProduct from "./get-product";
-import makeUpdateProduct from "./update-product";
-import makeDeleteProduct from "./delete-product";
-
 import { productMapper } from "../../infrastructure/db";
+
+export function makeAddProduct(productsDb) {
+    return async function addProduct(productInfo) {
+        const product = makeProduct(productInfo);
+        const exists = await productsDb.findByBarcode({barcode: product.getBarcode()});
+        return exists ? false : productsDb.insert({
+            id: product.getId(),
+            name: product.getName(),
+            categoryId: product.getCategoryId(),
+            description: product.getDescription(),
+            barcode: product.getBarcode(),
+            unit: product.getUnit(),
+            imageUri: product.getImageUri(),
+            price : product.getProce(),
+            purchasePrice: product.getPurchagePrice(),
+            quantity : product.getQuantity()
+        })
+    }
+}
+
+export function makeGetProduct(productsDb) {
+    return async function getProduct(productBarcode) {
+        if (!productBarcode) {
+            throw Error("Product barcode is required");
+        }
+        const product = await productsDb.findByBarcode({ barcode : productBarcode });
+        return product;
+    }
+}
+
+export function makeDeleteProduct(productsDb) {
+    return async function deleteProduct(barcode) { 
+        const exists = await productsDb.findByBarcode({barcode: barcode});
+        if (!exists) {
+            throw Error("Product does not exist.");
+        }
+        return await productsDb.remove(barcode);
+    } 
+}
+
+export function makeUpdateProduct(productsDb) {
+    return async function updateProduct(barcode, productInfo) { 
+        const exists = await productsDb.findByBarcode({barcode: barcode});
+        if (!exists) {
+            throw Error("Product does not exist.");
+        }
+        const product = makeProduct(productInfo);
+        return await productsDb.update(barcode, {
+            name: product.getName(),
+            category: product.getCategoryId(),
+            description: product.getDescription(),
+            barcode: product.getBarcode(),
+            unit: product.getUnit(),
+            imageUri: product.getImageUri(),
+            modifiedOn : product.getModiedOn(),
+            price : product.getProce(),
+            purchasePrice: product.getPurchagePrice(),
+            quantity: product.getQuantity()
+        });
+    } 
+}
 
 const addProduct = makeAddProduct(productMapper);
 const getProduct = makeGetProduct(productMapper);
