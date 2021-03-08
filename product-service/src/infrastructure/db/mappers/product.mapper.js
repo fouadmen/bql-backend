@@ -1,7 +1,7 @@
+import models from "../models";
 export default function ProductMapper(productModel) {
     return Object.freeze({
         findAll,
-        findById,
         findByBarcode,
         insert,
         remove,
@@ -10,14 +10,12 @@ export default function ProductMapper(productModel) {
     async function findAll() {
         return await productModel.findAll();
     }
-    async function findById(id) {
-        throw Error("Needs to be implemented.")
-    }
     async function findByBarcode({barcode : barcode}) {
-        return await productModel.findOne({where: {barcode : barcode}});
+        const product = await productModel.findOne({where: {barcode : barcode}, include : models.category});
+        return product;
     }
     async function insert(productInfo) {
-        return await productModel.create(productInfo);
+        return await productModel.create(productInfo);//includes categoryId
     }
     async function remove(barcode) {
         return await productModel.destroy({where : {barcode : barcode}});

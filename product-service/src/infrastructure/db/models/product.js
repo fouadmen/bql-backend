@@ -1,25 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-  const Product = sequelize.define('Product', {
+  const Product = sequelize.define('product', {
     id: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING(26),
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     }, 
     name: {
         type: DataTypes.STRING(50),
         allowNull: false
-    },
-    category:{
-        type: DataTypes.BIGINT,
-        allowNull:false,
-                    /*
-            type: DataTypes.INTEGER,
-            reference: {
-                model: Category,
-                key: 'id',
-            }
-        */
     },
     description:{
         type: DataTypes.STRING(255)
@@ -36,18 +24,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    createdOn:{
-        type: DataTypes.DATE, 
-        defaultValue: DataTypes.NOW
-    },
-    modifiedOn:{
-        type: DataTypes.DATE, 
-        defaultValue: DataTypes.NOW
-    }  
+    quantity : {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    }
   }, {});
-  // Product.associate = function(models) {
-  //   // associations can be defined here
-  //   // Product.belongsTo(models.Category) //TODO : check this association
-  // };
+  Product.associate = function(models) {
+     //TODO : check this association
+    Product.belongsTo(models.category)
+  };
   return Product;
 };

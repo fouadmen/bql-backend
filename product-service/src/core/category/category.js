@@ -1,26 +1,27 @@
 export default function buildMakeCategory({Id}) {
     return function Product({
-        id=Id.makeId(),
+        categoryId=Id.makeId(),
         name,
         description="",
         imageUri="",
-        createdOn = Date.now(),
-        modifiedOn = Date.now()
     }) {
-        if (!Id.isValidId(id)) {
+        if (!Id.isValidId(categoryId)) {
             throw new Error("Category must have valid id.");
         }
-        if (!name && name.length < 2) {
+        
+        if (!name) {
            throw new Error("Category must have a valid name"); 
         }
 
+        if (name.length < 2) {
+            throw new Error("Category name must be more than 2 characters"); 
+        }
+
         return Object.freeze({
-            getId : ()=> id,
+            getId : ()=> categoryId,
             getName: ()=>name,
             getDescription: ()=> description,
             getImageUri: ()=> imageUri,
-            getCreatedOn: ()=> createdOn,
-            getModiedOn: ()=> modifiedOn,
         })
 
     }

@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { postCategory, fetchCategory, patchCategory, removeCategory } from "../../../controllers/category";
+import { postCategory, fetchCategory, patchCategory, removeCategory, listCategories } from "../../../controllers/category";
 import makeCallback from "../";
 
 const router = Router();
 
 router.post("/",makeCallback(postCategory));
-router.get("/:name", makeCallback(fetchCategory));
-router.put("/:name", makeCallback(patchCategory));
-router.delete("/:name", makeCallback(removeCategory));
+router.get("/",makeCallback(listCategories));
+router.get("/:id", makeCallback(fetchCategory));
+router.put("/:id", makeCallback(patchCategory));
+router.delete("/:id", makeCallback(removeCategory));
 
 export default router;

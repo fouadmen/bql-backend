@@ -1,11 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-    const Category = sequelize.define('Category', {
-      id: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-      }, 
+module.exports = (sequelize,DataTypes) => {
+    const Category = sequelize.define('category', { 
       name: {
           type: DataTypes.STRING(50),
           allowNull: false,
@@ -14,21 +8,19 @@ module.exports = (sequelize, DataTypes) => {
       description:{
           type: DataTypes.STRING(255)
       },
-      createdOn:{
-          type: DataTypes.DATE, 
-          defaultValue: DataTypes.NOW
-      },
-      modifiedOn:{
-          type: DataTypes.DATE, 
-          defaultValue: DataTypes.NOW
-      },
       imageUri :{
           type: DataTypes.STRING(255)
-      } 
+      },
+      id : {
+        type : DataTypes.STRING(26),
+        unique: true,
+        allowNull: false,
+        primaryKey: true
+      }
     }, {});
-    // Category.associate = function(models) {
-    //   // associations can be defined here
-    
-    // };
+    Category.associate = function(models) {
+      // associations can be defined here
+      Category.hasMany(models.product);
+    };
     return Category;
   };

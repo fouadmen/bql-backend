@@ -9,11 +9,13 @@ export default function buildMakeProduct({Id, makeCategory}) {
         imageUri="",
         price,
         purchasePrice,
-        createdOn = Date.now(),
-        modifiedOn = Date.now()
+        quantity
     }) {
         if (!Id.isValidId(id)) {
             throw new Error("Product must have valid id.");
+        }
+        if (!Id.isValidId(categoryId)) {
+            throw new Error("Product must have valid category Id.");
         }
         if (!name && name.length < 2) {
            throw new Error("Product must have a valid name"); 
@@ -30,6 +32,9 @@ export default function buildMakeProduct({Id, makeCategory}) {
         if (!purchasePrice) {
             throw new Error("Product must have a purchasePrice");
         }
+        if (!quantity) {
+            throw new Error("Product must have a purchasePrice");
+        }
 
         return Object.freeze({
             getId : ()=> id,
@@ -39,10 +44,9 @@ export default function buildMakeProduct({Id, makeCategory}) {
             getBarcode : ()=> barcode,
             getUnit : ()=> unit,
             getImageUri: ()=> imageUri,
-            getCreatedOn: ()=> createdOn,
-            getModiedOn: ()=> modifiedOn,
             getProce:()=>price,
-            getPurchagePrice: ()=>purchasePrice
+            getPurchagePrice: ()=>purchasePrice,
+            getQuantity : ()=>quantity
         })
 
     }

@@ -1,3 +1,4 @@
+import models from "../models";
 export default function CategoryMapper(categoryModel) {
     return Object.freeze({
         findAll,
@@ -8,21 +9,25 @@ export default function CategoryMapper(categoryModel) {
         update
     })
     async function findAll() {
-        return await categoryModel.findAll();
+        const categories = await categoryModel.findAll({include: models.product});
+        return categories;
     }
     async function findById(id) {
-        throw Error("Needs to be implemented.")
+        const category = await categoryModel.findOne({where: {id : id}, include: models.product});
+        return category;
     }
     async function findByName({name : name}) {
-        return await categoryModel.findOne({where: {name : name}});
+        const category = await categoryModel.findOne({where: {name : name.toLowerCase()}});
+        return category;
     }
     async function insert(categoryInfo) {
-        return await categoryModel.create(categoryInfo);
+        const category = await categoryModel.create(categoryInfo);
+        return category;
     }
-    async function remove(name) {
-        return await categoryModel.destroy({where : {name : name}});
+    async function remove(id) {
+        return await categoryModel.destroy({where : {id : id}});
     }
-    async function update(name, categoryInfo) {
-        return await categoryModel.update(categoryInfo, {where : {name : name}});
+    async function update(id, categoryInfo) {
+        return await categoryModel.update(categoryInfo, {where : {id : id}});
     }
 }
