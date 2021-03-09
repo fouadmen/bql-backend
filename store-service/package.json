@@ -1,7 +1,7 @@
 {
-  "name": "product",
+  "name": "store",
   "version": "1.0.0",
-  "description": "Product API",
+  "description": "Store API",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run server",
