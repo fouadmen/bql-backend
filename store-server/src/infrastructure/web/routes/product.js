@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { postProduct, fetchProduct, patchProduct, removeProduct } from "../../../controllers/product";
-import makeCallback from "../";
+import makeCallback from "..";
 
 const router = Router();
 

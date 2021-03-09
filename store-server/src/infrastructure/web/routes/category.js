@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { postCategory, fetchCategory, patchCategory, removeCategory, listCategories } from "../../../controllers/category";
-import makeCallback from "../";
+import makeCallback from "..";
 
 const router = Router();
 
