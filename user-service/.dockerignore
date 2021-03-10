@@ -10,5 +10,6 @@ yarn-error.log
 
 # Bundle artifact
 *.jsbundle
+
+
 *.env
-store-service/upload_dummy.py
