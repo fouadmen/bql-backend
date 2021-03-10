@@ -30,9 +30,11 @@
   },
   "dependencies": {
     "babel-plugin-inline-dotenv": "^1.2.2",
+    "bcrypt": "^5.0.1",
     "cuid": "^2.1.8",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "loadash": "^1.0.0",
     "path": "^0.12.7",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",

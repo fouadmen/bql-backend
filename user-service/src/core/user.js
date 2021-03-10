@@ -1,4 +1,4 @@
-export default function buildMakeUser({Id, hashFunc}) {
+export default function buildMakeUser({Id}) {
     return function User({
         id=Id.makeId(),
         name,
@@ -19,6 +19,9 @@ export default function buildMakeUser({Id, hashFunc}) {
         }
         if (!phone) {
             throw new Error("User must have valid phone.");
+        }
+        if (phone.length>10) {
+            throw new Error("User phone must be less than 10 digits.");
         }
         if (!password) {
             throw new Error("User must have valid password.");

@@ -9,7 +9,6 @@ module.exports = (sequelize,DataTypes) => {
     name: {
         type: DataTypes.STRING(50),
         allowNull: false,
-        unique: true
     },
     phone: {
       type: DataTypes.STRING(10),
@@ -25,15 +24,15 @@ module.exports = (sequelize,DataTypes) => {
       unique: true
     },
     password:{
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING,
       allowNull: false,
     }
   }, {
-    defaultScope: {
-      attributes: { 
-        exclude: ['password'] // TODO : This is not working (HIGH)
-      }
-    }
+    // defaultScope: {
+    //   attributes: { 
+    //     exclude: [''] // TODO : This is not working (HIGH)
+    //   }
+    // }
   });
   User.associate = function(models) {
     User.belongsTo(models.role);
