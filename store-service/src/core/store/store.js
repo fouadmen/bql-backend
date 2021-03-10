@@ -4,16 +4,20 @@ export default function buildMakeStore({Id}) {
         name,
         address,
         openingHours,
-        description
+        description,
+        ownerId
     }) {
         if (!Id.isValidId(id)) {
-            throw new Error("Product must have valid id.");
+            throw new Error("Store must have valid id.");
+        }
+        if (!Id.isValidId(ownerId)) {
+            throw new Error("Store owner must have valid id.");
         }
         if (!name) {
-            throw new Error("Product must have valid name.");
+            throw new Error("Store must have valid name.");
         }
         if (name.length<4) {
-            throw new Error("Product must have longer name.");
+            throw new Error("Store must have longer name.");
         }
         return Object.freeze({
             getId : ()=> id,
@@ -21,6 +25,7 @@ export default function buildMakeStore({Id}) {
             getAddress : ()=> address,
             getOpeningHours : ()=> openingHours,
             getDescription : ()=> description,
+            getOwnerId: ()=> ownerId
         })
 
     }

@@ -11,6 +11,7 @@ export function makeAddStore(storesDb) {
             address: store.getAddress(),
             openingHours: store.getOpeningHours(),
             description : store.getDescription(),
+            ownerId : store.getOwnerId()
         })
     }
 }

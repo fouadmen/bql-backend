@@ -18,6 +18,10 @@ module.exports = (sequelize,DataTypes) => {
     },
     description:{
       type : DataTypes.STRING(255),
+    },
+    ownerId : {
+      type : DataTypes.STRING(255),
+      allowNull: false,
     }
   }, {});
   Store.associate = function(models) {
