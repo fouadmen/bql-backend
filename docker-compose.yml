@@ -1,0 +1,75 @@
+version: "3.7"
+
+services:
+  user_api:
+    container_name: 'user_api'
+    restart: always
+    build: ./user-service
+    ports: 
+      - 5051:5051
+    volumes: 
+      - ./user-service:/app
+      - ./user-service/node_modules:/app/node_modules
+    depends_on: 
+      - user_db
+    env_file: 
+      - ./user-service/.env
+
+  user_db:
+    container_name: 'user_db'
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5433"
+    environment: 
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=baqala_user_db
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes: 
+      - user_db:/var/lib/postgresql/data
+
+  store_api:
+    container_name: 'store_api'
+    restart: always
+    build: ./store-service
+    ports: 
+      - 5050:5050
+    volumes: 
+      - ./store-service:/app
+      - ./store-service/node_modules:/app/node_modules
+    depends_on: 
+      - store_db
+    env_file: 
+      - ./store-service/.env
+
+  store_db:
+    container_name: 'store_db'
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment: 
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=baqala_store_db
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes: 
+      - store_db:/var/lib/postgresql/data
+
+  api_gateway:
+    container_name: api_gateway
+    image: nginx:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes: 
+      - ./api-gateway/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on: 
+      - user_api
+      - store_api
+
+volumes: 
+  user_db : {}
+  store_db : {}
+
