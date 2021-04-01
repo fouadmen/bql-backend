@@ -1,4 +1,5 @@
-module.exports = (sequelize,DataTypes) => {
+import {DataTypes} from "sequelize"
+module.exports = (sequelize,) => {
   const User = sequelize.define('user', { 
     id : {
       type : DataTypes.STRING(26),
@@ -26,6 +27,11 @@ module.exports = (sequelize,DataTypes) => {
     password:{
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    hasStore:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
     }
   }, {
     // defaultScope: {
@@ -35,7 +41,7 @@ module.exports = (sequelize,DataTypes) => {
     // }
   });
   User.associate = function(models) {
-    User.belongsTo(models.role);
+    // User.belongsTo(models.role);
   };
   return User;
 };

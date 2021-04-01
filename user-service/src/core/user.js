@@ -6,14 +6,14 @@ export default function buildMakeUser({Id}) {
         address="",
         email,
         password, 
-        roleId
+        roleId="",
     }) {
         if (!Id.isValidId(id)) {
             throw new Error("User must have valid id.");
         }
-        if (!Id.isValidId(roleId)) {
-            throw new Error("User must have valid role.");
-        }
+        // if (!Id.isValidId(roleId)) {
+        //     throw new Error("User must have valid role.");
+        // }
         if (!name) {
             throw new Error("User must have valid name.");
         }

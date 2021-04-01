@@ -4,6 +4,7 @@ export default function UserMapper(userModel, roleModel) {
         findAll,
         findById,
         findByEmail,
+        findUser,
         insert,
         remove,
         update
@@ -12,11 +13,15 @@ export default function UserMapper(userModel, roleModel) {
         return await userModel.findAll();
     }
     async function findById(id) {
-        const raw_user = await userModel.findOne({where: {id : id}, include : [roleModel]});
+        const raw_user = await userModel.findOne({where: {id : id}, include : []});
+        return raw_user? raw_user.dataValues : raw_user;
+    }
+    async function findUser({phone, email}) {
+        const raw_user = await userModel.findOne({where: {email : email, phone : phone}, include : []});
         return raw_user? raw_user.dataValues : raw_user;
     }
     async function findByEmail(email) {
-        const raw_user = await userModel.findOne({where: {email : email}, include : [roleModel]});
+        const raw_user = await userModel.findOne({where: {email : email}, include : []});
         return raw_user? raw_user.dataValues : raw_user;
     }
     async function insert(userInfo) {

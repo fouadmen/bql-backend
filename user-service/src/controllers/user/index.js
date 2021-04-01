@@ -65,15 +65,15 @@ export function makeSignupUser({ addUser }) {
         try {
             const userInfo = httpRequest.body;
             userInfo["password"] = await bcrypt.hash(userInfo.password,10);
-            const posted = await addUser(userInfo);
-            if (posted) {
+            const user = await addUser(userInfo);
+            if (user) {
                 return {
                     headers: {
                         'Content-Type': 'application/json',
                         
                     },
                     statusCode: 201,
-                    body: {posted}
+                    body: {user}
                 }
             }else{
                 return {
