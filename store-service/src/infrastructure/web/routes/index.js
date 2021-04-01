@@ -7,9 +7,9 @@ import StoreRouter from './store';
 const baseRouter = Router();
 
 baseRouter.use("/stores", StoreRouter);
-baseRouter.use("/products",ProductRouter);
-baseRouter.use("/categories",CategoryRouter);
-baseRouter.use("/stocks", StockRouter);
+baseRouter.use("/stores/products",ProductRouter);
+baseRouter.use("/stores/categories",CategoryRouter);
+baseRouter.use("/stores/:storeId/stocks", StockRouter);
 
 export default baseRouter;
 

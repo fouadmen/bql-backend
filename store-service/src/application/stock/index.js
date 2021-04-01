@@ -10,7 +10,8 @@ export function makeAddStock(stocksDb) {
             buyingPrice: stock.getBuyingPrice(),
             sellingPrice: stock.getSellingPrice(),
             quantity: stock.getQuantity(),
-            storeId: stock.getStoreId()
+            storeId: stock.getStoreId(),
+            productId: stock.getProductId()
         })
     }
 }
@@ -55,7 +56,8 @@ export function makeUpdateStock(stocksDb) {
             buyingPrice: stock.getBuyingPrice(),
             sellingPrice: stock.getSellingPrice(),
             quantity: stock.getQuantity(),
-            storeId: stock.getStoreId()
+            storeId: stock.getStoreId(),
+            productId: stock.getProductId()
         });
     } 
 }

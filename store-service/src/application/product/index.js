@@ -8,7 +8,6 @@ export function makeAddProduct(productsDb) {
             id: product.getId(),
             name: product.getName(),
             categoryId: product.getCategoryId(),
-            stockId:product.getStockId(),
             description: product.getDescription(),
             barcode: product.getBarcode(),
             unit: product.getUnit(),
@@ -47,7 +46,6 @@ export function makeUpdateProduct(productsDb) {
         return await productsDb.update(barcode, {
             name: product.getName(),
             categoryId: product.getCategoryId(),
-            stockId:product.getStockId(),
             description: product.getDescription(),
             barcode: product.getBarcode(),
             unit: product.getUnit(),

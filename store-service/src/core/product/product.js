@@ -3,7 +3,6 @@ export default function buildMakeProduct({Id}) {
         id=Id.makeId(),
         name,
         categoryId,
-        stockId,
         description="",
         barcode,
         unit,
@@ -14,9 +13,6 @@ export default function buildMakeProduct({Id}) {
         }
         if (!Id.isValidId(categoryId)) {
             throw new Error("Product must have valid category Id.");
-        }
-        if (!Id.isValidId(stockId)) {
-            throw new Error("Product must have valid stock Id.");
         }
         if (!name && name.length < 2) {
            throw new Error("Product must have a valid name"); 
@@ -32,7 +28,6 @@ export default function buildMakeProduct({Id}) {
             getId : ()=> id,
             getName: ()=>name,
             getCategoryId: ()=> categoryId,
-            getStockId: ()=> stockId,
             getDescription: ()=> description,
             getBarcode : ()=> barcode,
             getUnit : ()=> unit,

@@ -5,13 +5,17 @@ export default function buildMakeStock({Id}) {
         minLimit,
         buyingPrice,
         sellingPrice,
-        storeId
+        storeId,
+        productId
     }) {
         if (!Id.isValidId(id)) {
             throw new Error("Stock must have valid id.");
         }
         if (!Id.isValidId(storeId)) {
             throw new Error("Stock must have valid storeId.");
+        }
+        if (!Id.isValidId(productId)) {
+            throw new Error("Stock must have valid productId.");
         }
         if (!quantity) {
            throw new Error("Stock must have a valid quantity"); 
@@ -32,7 +36,8 @@ export default function buildMakeStock({Id}) {
             getMinLimit : ()=> minLimit,
             getBuyingPrice : ()=> buyingPrice,
             getSellingPrice: ()=> sellingPrice,
-            getStoreId: ()=>storeId
+            getStoreId: ()=>storeId,
+            getProductId: ()=>productId
         })
 
     }
