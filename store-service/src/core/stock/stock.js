@@ -10,7 +10,6 @@ export default function buildMakeStock({Id}) {
         if (!Id.isValidId(id)) {
             throw new Error("Stock must have valid id.");
         }
-        console.log(storeId);
         if (!Id.isValidId(storeId)) {
             throw new Error("Stock must have valid storeId.");
         }

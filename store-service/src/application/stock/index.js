@@ -2,7 +2,6 @@ import { stockMapper } from "../../infrastructure/db";
 import makeStock from "../../core/stock";
 export function makeAddStock(stocksDb) {
     return async function addStock(stockInfo) {
-        console.log(stockInfo);
         const stock = makeStock(stockInfo);
         const exists = await stocksDb.findById(stock.getId());
         return exists ? false : stocksDb.insert({

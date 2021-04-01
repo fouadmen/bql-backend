@@ -3,6 +3,7 @@ export default function StoreMapper(storeModel) {
     return Object.freeze({
         findAll,
         findById,
+        findByUser,
         insert,
         update
     })
@@ -12,6 +13,10 @@ export default function StoreMapper(storeModel) {
     }
     async function findById(id) {
         const stock = await storeModel.findOne({where: {id : id}, include: models.stock});
+        return stock;
+    }
+    async function findByUser(id) {
+        const stock = await storeModel.findOne({where: {ownerId : id}});
         return stock;
     }
     async function insert(storeInfo) {

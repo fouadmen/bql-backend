@@ -6,8 +6,8 @@ import _ from "lodash";
 export function makeAddUser(usersDb) {
     return async function addUser(userInfo) {
         const user = makeUser(userInfo);
-        const exists = await usersDb.findByEmail(user.getEmail());
-
+        const exists = await usersDb.findUser({email : user.getEmail(), phone: user.getPhone()});
+        console.log(exists);
         if (exists) {
             var error = new Error("User already exists");
             error.name = "BusinessError";

@@ -1,4 +1,4 @@
-import { addStore, getStore, updateStore, getAllStores } from "../../application";
+import { addStore, getStore, updateStore, getAllStores, getStoreByUser } from "../../application";
 
 export function makeFetchStore({ getStore }) {
     return async function fetchStore (httpRequest){
@@ -29,19 +29,48 @@ export function makeFetchStore({ getStore }) {
     }
 }
 
+export function makeFetchUserStore({ getStoreByUser }) {
+    return async function fetchStore (httpRequest){
+        try {
+            const userId = httpRequest.params.userId;
+            const store = await getStoreByUser(userId);
+            return {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                statusCode: 200,
+                body: {store}
+            }
+        } catch (error) {
+            // TODO : Error logging
+            console.error(error);
+
+            return {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                statusCode: 400,
+                body: {
+                    error: error.message
+                }
+            }
+        }
+    }
+}
+
 export function makePatchStore({ updateStore }) {
     return async function patchStore (httpRequest){
         try {
             const storeInfo = httpRequest.body;
             const id = httpRequest.params.id;
-            const updated = await updateStore(id, storeInfo);
+            const store = await updateStore(id, storeInfo);
             return {
                 headers: {
                     'Content-Type': 'application/json',
                     
                 },
                 statusCode: 201,
-                body: {updated}
+                body: {store}
             }    
         } catch (error) {
             // TODO : Error logging
@@ -63,15 +92,15 @@ export function makePostStore({ addStore }) {
     return async function postStore (httpRequest){
         try {
             const storeInfo = httpRequest.body;
-            const posted = await addStore(storeInfo);
-            if (posted) {
+            const store = await addStore(storeInfo);
+            if (store) {
                 return {
                     headers: {
                         'Content-Type': 'application/json',
                         
                     },
                     statusCode: 201,
-                    body: {posted}
+                    body: {store}
                 }
             }else{
                 return {
@@ -130,10 +159,11 @@ export function makeListStores({ getAllStores }) {
 
 const postStore = makePostStore({addStore});
 const fetchStore = makeFetchStore({getStore});
+const fetchUserStore = makeFetchUserStore({getStoreByUser})
 const patchStore = makePatchStore({updateStore});
 const listStores = makeListStores({getAllStores});
 
-const storeController = Object.freeze({ postStore, fetchStore, patchStore, listStores });
+const storeController = Object.freeze({ postStore, fetchStore, patchStore, listStores, fetchUserStore });
 
 export default storeController;
-export { postStore, fetchStore, patchStore, listStores };
+export { postStore, fetchStore, patchStore, listStores, fetchUserStore };

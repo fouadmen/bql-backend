@@ -7,7 +7,7 @@ export function makeAddStore(storesDb) {
         const exists = await storesDb.findById(store.getId());
         return exists ? false : storesDb.insert({
             id: store.getId(),
-            name: store.getName(),
+            storeName: store.getstoreName(),
             address: store.getAddress(),
             openingHours: store.getOpeningHours(),
             description : store.getDescription(),
@@ -29,6 +29,16 @@ export function makeGetStore(storesDb) {
             throw Error("Store id is required");
         }
         const store = await storesDb.findById(id);
+        return store;
+    }
+}
+
+export function makeGetStoreByUser(storesDb) {
+    return async function getStoreByUser(id) {
+        if (!id) {
+            throw Error("User id is required");
+        }
+        const store = await storesDb.findByUser(id);
         return store;
     }
 }
@@ -63,13 +73,15 @@ const getStore = makeGetStore(storeMapper);
 const updateStore = makeUpdateStore(storeMapper);
 const deleteStore = makeDeleteStore(storeMapper);
 const getAllStores = makeGetAllStores(storeMapper);
+const getStoreByUser = makeGetStoreByUser(storeMapper);
 
 const storeService = Object.freeze({
     addStore,
     getStore,
     updateStore,
-    getAllStores
+    getAllStores,
+    getStoreByUser
 });
 
 export default storeService;
-export {addStore, getStore, updateStore, getAllStores};
+export {addStore, getStore, updateStore, getAllStores, getStoreByUser};
