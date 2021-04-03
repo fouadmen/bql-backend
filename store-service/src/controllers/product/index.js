@@ -34,14 +34,14 @@ export function makePatchProduct({ updateProduct }) {
         try {
             const productInfo = httpRequest.body;
             const productBarcode = httpRequest.params.barcode;
-            const updated = await updateProduct(productBarcode, productInfo);
+            const product = await updateProduct(productBarcode, productInfo);
             return {
                 headers: {
                     'Content-Type': 'application/json',
                     
                 },
                 statusCode: 201,
-                body: {updated}
+                body: {product}
             }    
         } catch (error) {
             // TODO : Error logging
@@ -63,15 +63,15 @@ export function makePostProduct({ addProduct }) {
     return async function postProduct (httpRequest){
         try {
             const productInfo = httpRequest.body;
-            const posted = await addProduct(productInfo);
-            if (posted) {
+            const product = await addProduct(productInfo);
+            if (product) {
                 return {
                     headers: {
                         'Content-Type': 'application/json',
                         
                     },
                     statusCode: 201,
-                    body: {posted}
+                    body: {product}
                 }
             }else{
                 return {

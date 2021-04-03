@@ -34,14 +34,14 @@ export function makePatchStock({ updateStock }) {
         try {
             const stockInfo = httpRequest.body;
             const id = httpRequest.params.id;
-            const updated = await updateStock(id, stockInfo);
+            const stock = await updateStock(id, stockInfo);
             return {
                 headers: {
                     'Content-Type': 'application/json',
                     
                 },
                 statusCode: 201,
-                body: {updated}
+                body: {stock}
             }    
         } catch (error) {
             // TODO : Error logging
@@ -63,15 +63,15 @@ export function makePostStock({ addStock }) {
     return async function postStock (httpRequest){
         try {
             const stockInfo = httpRequest.body;
-            const posted = await addStock(stockInfo);
-            if (posted) {
+            const stock = await addStock(stockInfo);
+            if (stock) {
                 return {
                     headers: {
                         'Content-Type': 'application/json',
                         
                     },
                     statusCode: 201,
-                    body: {posted}
+                    body: {stock}
                 }
             }else{
                 return {

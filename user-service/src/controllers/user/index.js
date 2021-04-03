@@ -35,14 +35,14 @@ export function makePatchUser({ updateUser }) {
         try {
             const userInfo = httpRequest.body;
             const userId= httpRequest.params.id;
-            const updated = await updateUser(userId, userInfo);
+            const user = await updateUser(userId, userInfo);
             return {
                 headers: {
                     'Content-Type': 'application/json',
                     
                 },
                 statusCode: 201,
-                body: {updated}
+                body: {user}
             }    
         } catch (error) {
             // TODO : Error logging
