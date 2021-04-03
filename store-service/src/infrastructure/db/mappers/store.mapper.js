@@ -24,6 +24,7 @@ export default function StoreMapper(storeModel) {
         return stock;
     }
     async function update(id, storeInfo) {
-        return await storeModel.update(storeInfo, {where : {id : id}});
+        const store = await storeModel.update(storeInfo, {where : {id : id}, returning : true, plain: true});
+        return store ? store[1] : store;
     }
 }

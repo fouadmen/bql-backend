@@ -21,6 +21,6 @@ export default function ProductMapper(productModel) {
         return await productModel.destroy({where : {barcode : barcode}});
     }
     async function update(barcode, productInfo) {
-        return await productModel.update(productInfo, {where : {barcode : barcode}});
+        return await productModel.update(productInfo, {where : {barcode : barcode}, returning : true});
     }
 }
