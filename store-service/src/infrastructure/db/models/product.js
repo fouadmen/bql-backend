@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(255)
     },
     barcode:{
-        type: DataTypes.BIGINT.UNSIGNED,
+        type: DataTypes.STRING(50),
         unique: true
     },
     unit : {
